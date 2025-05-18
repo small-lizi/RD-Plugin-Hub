@@ -1,0 +1,76 @@
+{
+  "name": "rd-plugin-hub",
+  "version": "1.0.1",
+  "description": "RD Plugin Hub - A Rhythm Game Plugin Hub",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "make-icns": "node scripts/make-icns.js",
+    "pack-mac": "npm run make-icns && electron-builder --mac",
+    "pack": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "build": {
+    "appId": "cn.memsyslizi.rdpluginhub",
+    "productName": "RD Plugin Hub",
+    "copyright": "Copyright © 2025 MemSys_Lizi",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "icon": "build/icon.icns",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "darkModeSupport": true,
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "identity": null
+    },
+    "dmg": {
+      "icon": "build/icon.icns",
+      "iconSize": 128,
+      "contents": [
+        {
+          "x": 380,
+          "y": 240,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 122,
+          "y": 240,
+          "type": "file"
+        }
+      ],
+      "window": {
+        "width": 540,
+        "height": 380
+      }
+    },
+    "protocols": {
+      "name": "ADOFAI Tools URL",
+      "schemes": [
+        "adofaitools"
+      ]
+    }
+  },
+  "author": {
+    "name": "MemSys_Lizi",
+    "email": "001@memsyslizi.site"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.2.0",
+    "electron-builder": "^24.13.3"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.10",
+    "axios": "^1.6.5"
+  }
+}
