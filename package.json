@@ -1,22 +1,53 @@
 {
   "name": "rd-plugin-hub",
   "version": "1.0.1",
-  "description": "RD Plugin Hub - A Rhythm Game Plugin Hub",
+  "description": "Rhythm Doctor Plugin Hub",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "make-icns": "node scripts/make-icns.js",
-    "pack-mac": "npm run make-icns && electron-builder --mac",
-    "pack": "electron-builder",
+    "build:win": "electron-builder build --win --publish never",
+    "build:mac": "npm run make-icns && electron-builder --mac",
+    "dist": "electron-builder",
     "postinstall": "electron-builder install-app-deps"
   },
+  "author": {
+    "name": "MemSys_Lizi",
+    "email": "001@memsyslizi.site"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.2.0",
+    "electron-builder": "^24.13.3"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.10",
+    "axios": "^1.6.5"
+  },
   "build": {
-    "appId": "cn.memsyslizi.rdpluginhub",
+    "appId": "com.memsyslizi.rd-plugin-hub",
     "productName": "RD Plugin Hub",
     "copyright": "Copyright © 2025 MemSys_Lizi",
     "directories": {
       "output": "dist",
       "buildResources": "build"
+    },
+    "win": {
+      "icon": "assets/img/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
     },
     "mac": {
       "category": "public.app-category.developer-tools",
@@ -54,23 +85,10 @@
       }
     },
     "protocols": {
-      "name": "ADOFAI Tools URL",
+      "name": "RD Plugin Hub URL",
       "schemes": [
-        "adofaitools"
+        "rdpluginhub"
       ]
     }
-  },
-  "author": {
-    "name": "MemSys_Lizi",
-    "email": "001@memsyslizi.site"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "electron": "^28.2.0",
-    "electron-builder": "^24.13.3"
-  },
-  "dependencies": {
-    "adm-zip": "^0.5.10",
-    "axios": "^1.6.5"
   }
 }
