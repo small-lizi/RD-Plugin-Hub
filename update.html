@@ -139,7 +139,7 @@
 <body>
     <img src="./assets/img/startup.png" class="startup-image" alt="启动页面">
     <div class="loading-text" id="loadingText">
-        正在检查更新...
+        check-update
     </div>
     <script>
         const { ipcRenderer } = require('electron');
@@ -162,11 +162,11 @@
             const updateInfoDiv = document.createElement('div');
             updateInfoDiv.className = 'update-info';
             updateInfoDiv.innerHTML = `
-                发现新版本 <span class="version">v${info.version}</span>
+                find new version <span class="version">v${info.version}</span>
                 <div class="changelog">
                     ${info.changelog.split('\n').map(line => '• ' + line).join('<br>')}
                 </div>
-                <div class="update-hint">点击任意处开始更新</div>
+                <div class="update-hint">click anywhere to update</div>
             `;
             document.body.appendChild(updateInfoDiv);
             
@@ -179,7 +179,7 @@
         // 监听无更新消息
         ipcRenderer.on('no-update', () => {
             const loadingText = document.getElementById('loadingText');
-            loadingText.textContent = '正在启动...';
+            loadingText.textContent = 'starting...';
             
             const remainingTime = minDisplayTime - (Date.now() - startTime);
             if (remainingTime > 0) {

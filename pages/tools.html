@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>RD Plugin Hub - 工具</title>
+    <title>RD Plugin Hub - Tools</title>
     <style>
         body {
             margin: 0;
@@ -505,8 +505,8 @@
         </div>
     </div>
     <div id="contextMenu" class="context-menu">
-        <div class="context-menu-item" id="menuOpenFolder">打开工具文件夹</div>
-        <div class="context-menu-item" id="menuOpenDoc">在浏览器中打开文档</div>
+        <div class="context-menu-item" id="menuOpenFolder">open tool folder</div>
+        <div class="context-menu-item" id="menuOpenDoc">open document in browser</div>
     </div>
     <script src="../components/titlebar.js"></script>
     <script src="../components/sidebar.js"></script>
@@ -565,7 +565,7 @@
             const status = downloadStatus.get(toolId);
             const info = await ipcRenderer.invoke('get-tool-info', toolId);
 
-            let buttonText = '下载';
+            let buttonText = 'download';
             let progress = 0;
             let disabled = false;
             let onClick = `handleDownload('${toolId}', '${selectedTool.downloadUrl}', '${selectedTool.version}')`;
@@ -573,35 +573,35 @@
             if (status) {
                 switch (status.status) {
                     case 'downloading':
-                        buttonText = `下载中 ${status.progress}%`;
+                        buttonText = `downloading ${status.progress}%`;
                         progress = status.progress;
                         disabled = true;
                         break;
                     case 'completed':
-                        buttonText = '已下载';
+                        buttonText = 'downloaded';
                         progress = 100;
                         disabled = true;
                         break;
                     case 'ready':
-                        buttonText = '打开';
+                        buttonText = 'open';
                         progress = 100;
                         onClick = `openToolDirectory('${toolId}')`;
                         break;
                     case 'needUpdate':
-                        buttonText = '更新';
+                        buttonText = 'update';
                         progress = 100;
                         break;
                     case 'error':
-                        buttonText = '下载失败';
+                        buttonText = 'download failed';
                         break;
                 }
             } else if (info) {
                 // 如果有本地信息但没有下载状态，设置为ready或needUpdate
                 if (info.version < selectedTool.version) {
-                    buttonText = '更新';
+                    buttonText = 'update';
                     progress = 100;
                 } else {
-                    buttonText = '打开';
+                    buttonText = 'open';
                     progress = 100;
                     onClick = `openToolDirectory('${toolId}')`;
                 }
@@ -636,7 +636,7 @@
                     });
 
                     if (!response.ok) {
-                        throw new Error('更新下载次数失败');
+                        throw new Error('update download count failed');
                     }
 
                     const result = await response.json();
@@ -646,7 +646,7 @@
                         renderSelectedToolHeader();
                     }
                 } catch (err) {
-                    console.error('更新下载次数失败:', err);
+                    console.error('update download count failed:', err);
                     // 继续下载，即使更新下载次数失败
                 }
                 
@@ -659,7 +659,7 @@
                     version
                 });
             } catch (err) {
-                console.error('下载失败:', err);
+                console.error('download failed:', err);
                 downloadStatus.set(toolId, { status: 'error', error: err.message });
                 updateDownloadButton(toolId);
             }
@@ -673,7 +673,7 @@
                 return;
             }
 
-            const formattedChangelog = selectedTool.changelog ? formatChangelog(selectedTool.changelog) : '暂无更新日志';
+            const formattedChangelog = selectedTool.changelog ? formatChangelog(selectedTool.changelog) : 'no changelog';
 
             headerElement.innerHTML = `
                 <div class="tool-header-content">
@@ -681,9 +681,9 @@
                     <div class="tool-header-info">
                         <h2>${selectedTool.name}</h2>
                         <div class="tool-meta-info">
-                            <span class="meta-item">版本 ${selectedTool.version}</span>
-                            <span class="meta-item">下载次数 ${selectedTool.downloads || 0}</span>
-                            <span class="meta-item">发布于 ${selectedTool.releaseDate}</span>
+                            <span class="meta-item">version ${selectedTool.version}</span>
+                            <span class="meta-item">downloads ${selectedTool.downloads || 0}</span>
+                            <span class="meta-item">release date ${selectedTool.releaseDate}</span>
                         </div>
                         <div class="author-info" onclick="openAuthorLink('${selectedTool.author.link}')">
                             <img src="${selectedTool.author.avatar}" class="author-avatar" alt="${selectedTool.author.name}">
@@ -695,21 +695,21 @@
                     <button class="tool-header-button">
                         简介
                         <div class="tooltip-content description">
-                            <div class="tooltip-title">工具简介</div>
-                            <div class="tooltip-body">${selectedTool.description || '暂无简介'}</div>
+                            <div class="tooltip-title">tool description</div>
+                            <div class="tooltip-body">${selectedTool.description || 'no description'}</div>
                         </div>
                     </button>
                     <button class="tool-header-button">
                         更新日志
                         <div class="tooltip-content changelog">
-                            <div class="tooltip-title">更新日志</div>
+                            <div class="tooltip-title">changelog</div>
                             <div class="tooltip-body">${formattedChangelog}</div>
                         </div>
                     </button>
                 </div>
                 <button class="download-button" onclick="handleDownload('${selectedTool.id}', '${selectedTool.downloadUrl}', '${selectedTool.version}')">
                     <div class="download-progress" style="width: 0%"></div>
-                    <span class="download-text">下载</span>
+                    <span class="download-text">download</span>
                 </button>
             `;
 
@@ -719,13 +719,13 @@
 
         // 格式化更新日志
         function formatChangelog(changelog) {
-            if (!changelog) return '暂无更新日志';
+            if (!changelog) return 'no changelog';
             
             // 假设changelog是一个数组，每个元素包含version、date和content
             if (Array.isArray(changelog)) {
                 return changelog.map(log => `
                     <div class="changelog-item">
-                        <div class="changelog-version">版本 ${log.version}</div>
+                        <div class="changelog-version">version ${log.version}</div>
                         <div class="changelog-date">${log.date}</div>
                         <div class="changelog-content">${log.content}</div>
                     </div>
@@ -788,7 +788,7 @@
                 `;
             } else {
                 contentElement.innerHTML = `
-                    <div class="no-doc-message">该工具暂时没有文档</div>
+                    <div class="no-doc-message">this tool has no documentation</div>
                 `;
             }
         }
@@ -810,7 +810,7 @@
                         }
                     }
                 } catch (err) {
-                    console.error('检查工具信息失败:', err);
+                    console.error('check tool info failed:', err);
                 }
             }
 
@@ -830,7 +830,7 @@
             try {
                 await ipcRenderer.invoke('open-tool-directory', toolId);
             } catch (err) {
-                console.error('打开工具目录失败:', err);
+                console.error('open tool directory failed:', err);
             }
         }
 
@@ -844,7 +844,7 @@
                     selectTool(tools[0].id);
                 }
             } catch (error) {
-                console.error('获取工具列表失败:', error);
+                console.error('get tool list failed:', error);
             }
         }
 

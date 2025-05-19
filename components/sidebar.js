@@ -152,33 +152,33 @@ class Sidebar extends HTMLElement {
             </style>
             <nav class="sidebar-nav" id="sidebarNav">
                 <div class="nav-item" data-page="shouye">
-                    <img src="../assets/img/shouye.png" alt="首页">
-                    <span class="tooltip">首页</span>
+                    <img src="../assets/img/shouye.png" alt="home">
+                    <span class="tooltip">home</span>
                 </div>
                 <div class="nav-item" data-page="tools">
-                    <img src="../assets/img/tools.png" alt="工具">
-                    <span class="tooltip">工具</span>
+                    <img src="../assets/img/tools.png" alt="tools">
+                    <span class="tooltip">tools</span>
                 </div>
                 <div class="nav-item" data-page="online-tools">
-                    <img src="../assets/img/tools.png" alt="在线工具">
-                    <span class="tooltip">在线工具</span>
+                    <img src="../assets/img/tools.png" alt="online tools">
+                    <span class="tooltip">online tools</span>
                 </div>
                 <div class="nav-item" data-page="community">
-                    <img src="../assets/img/chart.png" alt="社区">
-                    <span class="tooltip">社区</span>
+                    <img src="../assets/img/chart.png" alt="community">
+                    <span class="tooltip">community</span>
                 </div>
                 <div class="divider"></div>
                 <!-- 热门页面将在这里动态添加 -->
             </nav>
             <div class="admin-section">
                 <div class="nav-item" data-page="admin">
-                    <img src="../assets/img/admin.png" alt="开发者控制台">
-                    <span class="tooltip">开发者控制台</span>
+                    <img src="../assets/img/admin.png" alt="developer console">
+                    <span class="tooltip">developer console</span>
                 </div>
             </div>
             <!-- 添加右键菜单 -->
             <div class="context-menu" id="adminContextMenu">
-                <div class="context-menu-item" id="menuOpenInBrowser">在浏览器中打开</div>
+                <div class="context-menu-item" id="menuOpenInBrowser">open in browser</div>
             </div>
         `;
 
@@ -216,7 +216,7 @@ class Sidebar extends HTMLElement {
             // 更新事件监听
             this.setupEventListeners();
         } catch (error) {
-            console.error('加载热门页面失败:', error);
+            console.error('load hot pages failed:', error);
         }
     }
 

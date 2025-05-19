@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>RD Plugin Hub - 在线工具</title>
+    <title>RD Plugin Hub - Online Tools</title>
     <style>
         body {
             margin: 0;
@@ -165,8 +165,8 @@
     </div>
     <!-- 添加右键菜单 -->
     <div id="contextMenu" class="context-menu">
-        <div class="context-menu-item" id="menuOpenInBrowser">在浏览器中打开</div>
-        <div class="context-menu-item" id="menuCopyUrl">复制链接</div>
+        <div class="context-menu-item" id="menuOpenInBrowser">open in browser</div>
+        <div class="context-menu-item" id="menuCopyUrl">copy url</div>
     </div>
     <script src="../components/titlebar.js"></script>
     <script src="../components/sidebar.js"></script>
@@ -220,7 +220,7 @@
                     toolsSidebar.appendChild(toolIcon);
                 });
             } catch (error) {
-                console.error('获取工具列表失败:', error);
+                console.error('get tool list failed:', error);
             }
         }
 
@@ -286,10 +286,10 @@
                     navigator.clipboard.writeText(contextMenuTool.url)
                         .then(() => {
                             // 可以添加一个提示，表示复制成功
-                            console.log('链接已复制到剪贴板');
+                            console.log('link copied to clipboard');
                         })
                         .catch(err => {
-                            console.error('复制失败:', err);
+                            console.error('copy failed:', err);
                         });
                 }
                 hideContextMenu();

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>RD Plugin Hub - 热门页面</title>
+    <title>RD Plugin Hub - Hot Website</title>
     <style>
         body {
             margin: 0;
@@ -45,10 +45,10 @@
         // 从 URL 参数获取网站地址
         const urlParams = new URLSearchParams(window.location.search);
         const websiteUrl = urlParams.get('url');
-        const pageTitle = urlParams.get('title') || '热门页面';
+        const pageTitle = urlParams.get('title') || 'Hot Website';
         
         // 设置页面标题
-        document.title = `ADOFAI Tools - ${pageTitle}`;
+        document.title = `RD Plugin Hub - ${pageTitle}`;
         
         // 创建 WebViewer
         if (websiteUrl) {

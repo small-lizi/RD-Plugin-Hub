@@ -52,9 +52,9 @@ class WebViewer extends HTMLElement {
                         ]
                     });
                     localStorage.setItem('webviewer-last-clear-cache', today.toString());
-                    console.log('WebViewer 缓存已自动清除');
+                    console.log('WebViewer cache has been automatically cleared');
                 } catch (error) {
-                    console.error('清除缓存时发生错误:', error);
+                    console.error('error clearing cache:', error);
                 }
             }
         }
@@ -245,7 +245,7 @@ class WebViewer extends HTMLElement {
                         webpreferences="webSecurity=no"
                         disablewebsecurity
                     ></webview>
-                    <div class="loading">加载中...</div>
+                    <div class="loading">loading...</div>
                     <div class="download-progress">
                         <div class="download-info">
                             <span class="download-name"></span>
@@ -262,7 +262,7 @@ class WebViewer extends HTMLElement {
                         <svg viewBox="0 0 24 24">
                             <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
                         </svg>
-                        评论区
+                        comments
                     </button>
                     <div class="comments-drawer" id="commentsDrawer">
                         <iframe class="comments-iframe" src="https://www.rhythmdoctor.top/comments/index.php?id=${toolId}"></iframe>
@@ -327,7 +327,7 @@ class WebViewer extends HTMLElement {
                 <svg viewBox="0 0 24 24">
                     <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
                 </svg>
-                ${isOpen ? '关闭评论' : '评论区'}
+                ${isOpen ? 'close comments' : 'comments'}
             `;
         });
 
@@ -342,7 +342,7 @@ class WebViewer extends HTMLElement {
 
         webview.addEventListener('did-fail-load', (event) => {
             if (event.errorCode !== -3) {
-                loading.textContent = '加载失败，请检查网络连接';
+                loading.textContent = 'load failed, please check your network connection';
                 loading.classList.add('visible');
                 setTimeout(() => {
                     loading.classList.remove('visible');
@@ -371,7 +371,7 @@ class WebViewer extends HTMLElement {
                     shell.openExternal(targetUrl);
                 }
             } catch (error) {
-                console.error('URL 解析错误:', error);
+                console.error('URL parse error:', error);
             }
         });
     }
